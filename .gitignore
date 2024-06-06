@@ -32,3 +32,5 @@ partials/structure/stylesheet.html
 
 # Hugo
 .hugo_build.lock
+
+**/*.svg

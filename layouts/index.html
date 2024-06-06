@@ -1,7 +1,8 @@
 {{ define "main" }}
- <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy {{ $.Param "text_color" | default "mid-gray" }}">
-    {{ .Content }}
-  </article>
+ <article class="cf ph3 ph5-l pt3 pt4-l f4 tc-l center measure-wide lh-copy {{ $.Param "text_color" | default "mid-gray" }}">
+      {{ .Content }}
+</article>
+  {{ partial "important-infos.html" }}
   {{/* Define a section to pull recent posts from. For Hugo 0.20 this will default to the section with the most number of pages. */}}
   {{ $mainSections := default (slice "berichte") }}
   {{/* Create a variable with that section to use in multiple places. */}}

@@ -1,4 +1,4 @@
-<nav class="pv3 ph3 ph4-ns" role="navigation">
+<nav class="pv3 ph3 ph4-ns dn db-l" role="navigation">
   <div class="flex-l justify-between items-center center">
     <a href="{{ .Site.Home.RelPermalink }}" class="f3 fw2 hover-white no-underline white-90 dib">
       {{ with .Site.Params.site_logo }}
@@ -23,4 +23,22 @@
       {{ partialCached "social-follow.html" . }}
     </div>
   </div>
+</nav>
+
+<nav id="mobile-nav" class="dn-l ph3 ph4-ns block db pv3 tr w-100 bg-near-black justify-between" role="navigation">
+    {{ partial "i18nlist.html" . }}
+    <svg id="toggle-collapse" width="2.5em" height="2.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 6H20M4 12H20M4 18H20" stroke="#f1f1f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    {{ if .Site.Menus.main }}
+    <div id="collapsible" class="dn flex-wrap tr pv3">
+      {{ range .Site.Menus.main }}
+      <div class="f4 fw4 ph3">
+        <a class="no-underline white-90" href="{{ .URL }}" title="{{ i18n " pageTitle" . }}">
+          {{ .Name }}
+        </a>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
 </nav>

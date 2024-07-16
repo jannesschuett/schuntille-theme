@@ -1,9 +1,32 @@
 {{ with partialCached "func/style/GetMainCSS" "style/GetMainCSS" }}
-<link rel="stylesheet" href="{{ .RelPermalink }}" >
-{{ end }}
+<link rel="stylesheet" href="{{ .RelPermalink }}" />
+{{ end }} {{ range site.Params.custom_css }} {{ with partialCached
+"func/style/GetResource" . . }}{{ else }}
+<link rel="stylesheet" href="{{ relURL (.) }}" />
+{{ end }} {{ end }}
 
-{{ range site.Params.custom_css }}
-  {{ with partialCached "func/style/GetResource" . . }}{{ else }}
-    <link rel="stylesheet" href="{{ relURL (.) }}">
-  {{ end }}
-{{ end }}
+<style>
+    .menu {
+        list-style: none;
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        max-height: 0; /* Initially collapsed */
+    }
+    .menu.expanded {
+        max-height: 550px; /* Adjust based on your menu's content */
+    }
+    .menu li {
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+    }
+    .menu a {
+        text-decoration: none;
+        display: block;
+        padding: 10px 15px;
+        transition: background-color 0.3s ease-in-out;
+    }
+</style>

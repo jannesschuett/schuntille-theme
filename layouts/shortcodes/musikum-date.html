@@ -1,0 +1,7 @@
+{{ $musikum_frirst_day := index .Site.Params.musikum.datum 0 | time.AsTime }}
+{{ $musikum_second_day := index .Site.Params.musikum.datum 1 | time.AsTime }}
+{{- if compare.Le time.Now $musikum_second_day -}}
+Dieses Jahr findet das Musikum am {{ $musikum_frirst_day.Day -}}./{{- $musikum_second_day | time.Format ":date_short" }} statt.
+{{- else -}}
+Dieses Jahr fand das Musikum am {{ $musikum_frirst_day.Day -}}./{{- $musikum_second_day | time.Format ":date_short" }} statt.
+{{- end -}}

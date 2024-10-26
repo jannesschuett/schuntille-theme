@@ -1,0 +1,35 @@
+{{ with $file := .Get 0 }}
+  {{ with resources.Get $file }}
+    {{ with . | transform.Unmarshal }}
+    <div class="flex justify-center tl">
+      <table class="f4 w-100 mw8 center" cellspacing="0">
+        <thead>
+          <tr>
+            {{ range index . 0 }}
+              <th class="fw6 bb b--black-20 tl pb3 pr3">{{ . }}</th>
+            {{ end }}
+          </tr>
+        </thead>
+        <tbody>
+          {{ range after 1 . }}
+            <tr>
+              {{ range . }}
+                {{ if compare.Eq (strings.Substr . -2) "m2" }}
+                <td class="pv3 pr3 bb b--black-20">{{ strings.Substr . 0 -2 }}m<sup>2</sup></td>
+                {{ else }}
+                <td class="pv3 pr3 bb b--black-20">{{ . }}</td>
+                {{ end }}
+              {{ end }}
+            </tr>
+          {{ end }}
+        </tbody>
+      </table>
+    </div>
+    {{ end }}
+  {{ else }}
+    {{ errorf "The %q shortcode was unable to find %s. See %s" $.Name $file $.Position }}
+  {{ end }}
+{{ else }}
+  {{ errorf "The %q shortcode requires one positional argument, the path to the CSV file relative to the assets directory. See %s" .Name .Position }}
+{{ end }}
+

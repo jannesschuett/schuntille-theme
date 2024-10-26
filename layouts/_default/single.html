@@ -5,7 +5,7 @@
 
 {{ define "main" }}
 {{ $section := .Site.GetPage "section" .Section }}
-<article class="flex-l flex-wrap justify-between mw8 center ph3">
+<article class="flex-l flex-wrap flex-row-reverse justify-between mw8 center ph3">
   <header class="mt4 w-100">
     <aside class="instapaper_ignoref b helvetica tracked">
       {{/*
@@ -19,16 +19,30 @@
     </h1>
   </header>
 
-
-  <div class="nested-copy-line-height lh-copy {{ $.Param " post_content_classes" | default "serif" }} f4 nested-links {{
-    $.Param "text_color" | default "mid-gray" }} {{ cond (eq $.Site.Language.LanguageDirection "rtl" ) "pl4-l" "pr4-l"
-    }} w-two-thirds-l">
-    {{- .Content -}}
-  </div>
-
   <aside class="w-30-l mt6-l">
     {{- partial "menu-contextual.html" . -}}
   </aside>
 
+
+  {{ $reverse := false }}
+
+        {{ $featured_image := partial "func/GetFeaturedImage.html" . }}
+        {{ range .Params.items }}
+        <div class="flex items-center justify-center mv4 {{ if $reverse }}flex-row-reverse{{ end }}">
+            <img src="{{ $featured_image }}" alt="{{ .image.alt }}" class="w-40-l mw6">
+            <p class="pl3 ph3">{{ .text }}</p>
+        </div>
+        {{ $reverse = not $reverse }}
+  {{ end }}
+  
+  <div class="w-two-thirds-l">
+  <div class="nested-copy-line-height lh-copy {{ $.Param " post_content_classes" | default "serif" }} f4 nested-links {{
+      $.Param "text_color" | default "mid-gray" }} {{ cond (eq $.Site.Language.LanguageDirection "rtl" ) "pl4-l" "pr4-l"
+      }}">
+      {{- .Content -}}
+    </div>
+  </div>
+  
+  
 </article>
 {{ end }}

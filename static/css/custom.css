@@ -1,0 +1,18 @@
+/*
+@media (max-width: 636px) {
+    .container {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 635px) {
+    .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+    */
+.adresse {
+    min-width: 310.383px;
+}

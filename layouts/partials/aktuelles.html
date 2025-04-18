@@ -1,0 +1,14 @@
+{{/* This partial handles its own conditions */}}
+{{ if fileExists "content/de/aktuelles.md" }}
+  {{ $current := .Site.GetPage "aktuelles.md" }}
+  {{ with $current }}
+    {{ with .Params.expiration }}
+      {{ $expiry := time . }}
+      {{ if gt $expiry now }}
+        <h3 class="tc">
+            <a href="{{ $current.RelPermalink }}" title="{{ $current.Title }}">{{ $current.Title }}</a>
+        </h3>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

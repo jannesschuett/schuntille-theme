@@ -1,0 +1,38 @@
+{{ define "header" }}
+{{/* We can override any block in the baseof file be defining it in the template */}}
+<header>
+    <div class="{{ .Site.Params.background_color_class | default "bg-black" }}">
+      {{ partial "site-navigation.html" . }}
+</header>
+
+{{ end }}
+
+{{ define "main" }}
+{{ $section := .Site.GetPage "section" .Section }}
+<article class="flex-l flex-wrap justify-between mw8-l center ph4">
+  <header class="mt4 w-100">
+    <aside class="instapaper_ignoref b helvetica tracked">
+      {{/*
+      CurrentSection allows us to use the section title instead of inferring from the folder.
+      https://gohugo.io/variables/page/#section-variables-and-methods
+      */}}
+      {{with .CurrentSection.Title }}{{. | upper }}{{end}}
+    </aside>
+    <h1 class="f1 athelas mt3 mb1">
+      {{- .Title -}}
+    </h1>
+  </header>
+  <div class="nested-copy-line-height lh-copy {{ $.Param " post_content_classes" | default "serif" }} f4 {{
+          $.Param "text_color" | default "mid-gray" }} {{ cond (eq $.Site.Language.LanguageDirection "rtl" ) "pl4-l" "pr4-l"
+          }}">
+
+      {{- .Content -}}
+  
+      {{ $featured_image := partial "func/GetFeaturedImage.html" . }}
+      {{ with $featured_image }}
+          <img src="{{ . }}" alt="" class="w-100-l w-80"/>
+      {{ end }}
+    </div>
+  </div>
+</article>
+{{ end }}

@@ -3,17 +3,14 @@
 {{ $schuntember := slice "September" "October" }}
 {{ $current_month := time.Now.Month.String }}
 
-<h3 class="tc">
+<h3 class="tc ph5-l ph3">
     {{ if in $maifest $current_month }}
-    Bald findet wieder das Maifest in der Schuntille statt! Das Maifest findet in diesem Jahr am {{ site.Params.maifest
-    | default ("30.04.") }} statt.
+    Bald, am {{ site.Params.maifest | default ("30.04.") }} findet wieder das Maifest in der Schuntille statt!
     {{ end }}
     {{ if in $musikum $current_month }}
-    Bald findet wieder das Musikfestival "Musikum" in der Schuntille statt! Das diesjährige Musikum findet am {{
-    site.Params.musikum }} statt.
+    Bald, am {{ site.Params.musikum }}, findet wieder das Musikfestival "Musikum" in der Schuntille statt!
     {{ end }}
     {{ if in $schuntember $current_month }}
-    Bald findet wieder die Spooktille, die Halloween Party in der Schuntille statt! Die Spooktille findet dieses Jahr
-    am {{ site.Params.schuntember | default ("30.10.") }} statt.
+    Bald, {{ site.Params.schuntember | default ("30.10.") }} findet wieder die Spooktille, die Halloween Party in der Schuntille statt!
     {{ end }}
 </h3>
